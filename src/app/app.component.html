@@ -1,1 +1,4 @@
-<pcard-uts-workshop-nx-welcome></pcard-uts-workshop-nx-welcome>
+
+<div class="container" *ngIf="books$ | async as books">
+    <pcard-uts-workshop-book *ngFor="let book of books" [book]="book"></pcard-uts-workshop-book>
+</div>
