@@ -1,3 +1,4 @@
+import { LoggerService } from './logger.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class BasicService {
 
-  constructor() { }
+  constructor(private logger: LoggerService) { }
+
+  plus(a: number, b: number): number {
+    const result = a + b;
+
+    this.logger.log(`plus was called, result is: ${result}`);
+    return result;
+  }
 }
