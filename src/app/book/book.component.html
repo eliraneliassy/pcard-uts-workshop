@@ -14,7 +14,7 @@
 
   <div class="price">
     Price: <br />
-    {{ book.price | currency }}
+    {{ book.price | discount:0.1 | currency }}
   </div>
 
   <button (click)="addToCartClicked()">ADD TO CART</button>
