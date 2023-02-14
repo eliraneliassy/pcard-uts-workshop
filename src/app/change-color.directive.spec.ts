@@ -1,6 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { ChangeColorDirective } from './change-color.directive';
 
 
@@ -8,7 +8,7 @@ import { ChangeColorDirective } from './change-color.directive';
   selector: 'pcard-uts-workshop-test-cmp',
   template: `<div pcardUtsWorkshopChangeColor>Hello world!</div>`
 })
-class TestComponent {}
+class TestComponent { }
 
 
 describe('ChangeColorDirective', () => {
@@ -16,9 +16,16 @@ describe('ChangeColorDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async() => {
+  const rendererMock = {
+    setStyle: () => { return; }
+  }
+
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestComponent, ChangeColorDirective]
+      declarations: [TestComponent, ChangeColorDirective],
+      providers: [
+        { provide: Renderer2, useValue: rendererMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestComponent);
@@ -35,6 +42,6 @@ describe('ChangeColorDirective', () => {
     const divWithDirective: HTMLDivElement = fixture.debugElement.query(By.directive(ChangeColorDirective)).nativeElement;
 
     expect(divWithDirective.style.color).toBe('red');
-    
+
   });
 });

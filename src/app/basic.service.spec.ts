@@ -8,28 +8,34 @@ describe('BasicService', () => {
   let loggerService: LoggerService;
 
   beforeEach(() => {
+    // Arange
     TestBed.configureTestingModule({});
     service = TestBed.inject(BasicService);
     loggerService = TestBed.inject(LoggerService);
   });
 
   it('should be created', () => {
+    // Assert
     expect(service).toBeTruthy();
   });
 
   it('should sum two variables', () => {
-    
+ 
+    // Arange
     jest.spyOn(loggerService, 'log');
 
+
+    // Act
     const res = service.plus(2, 2);
-
-    expect(res).toBe(4);
-    expect(loggerService.log).toHaveBeenCalledTimes(1);
-
     const res2 = service.plus(1, 6);
-    expect(res2).toBe(7);
 
+    // Assert
+    expect(res).toBe(4);
     expect(loggerService.log).toHaveBeenCalledTimes(2);
+
+    
+    expect(res2).toBe(7);
+    // expect(loggerService.log).toHaveBeenCalledTimes(2);
   })
 });
 

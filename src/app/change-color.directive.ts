@@ -7,6 +7,7 @@ export class ChangeColorDirective implements AfterViewInit {
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
   ngAfterViewInit(): void {
+    console.log(this.renderer)
     this.renderer.setStyle(this.elementRef.nativeElement, 'color', 'red');
   }
 

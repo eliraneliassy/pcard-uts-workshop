@@ -1,3 +1,4 @@
+import { DiscountPipe } from './../discount.pipe';
 import { BOOKS_MOCK } from './../books.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -10,7 +11,7 @@ describe('BookComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BookComponent],
+      declarations: [BookComponent, DiscountPipe],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookComponent);
