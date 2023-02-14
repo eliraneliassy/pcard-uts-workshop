@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { DiscountPipe } from './discount.pipe';
 import { BookComponent } from './book/book.component';
 import { By } from '@angular/platform-browser';
@@ -8,6 +9,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { MockComponent, MockPipe } from 'ng-mocks';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatDialogHarness } from '@angular/material/dialog/testing';
 
 
 describe('AppComponent', () => {
@@ -34,7 +39,7 @@ describe('AppComponent', () => {
         MockComponent(BookComponent),
         MockPipe(DiscountPipe)
       ],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, MatDialogModule, NoopAnimationsModule],
       providers: [
         { provide: BooksService, useValue: booksServiceMock }
       ]
@@ -58,7 +63,7 @@ describe('AppComponent', () => {
     expect(items[0].componentInstance.book).toBe(BOOKS_MOCK[0])
   }))
 
-  it('should render books on the component', waitForAsync(async() => {
+  it('should render books on the component', waitForAsync(async () => {
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
@@ -66,6 +71,20 @@ describe('AppComponent', () => {
 
     expect(items[0].componentInstance.book).toBe(BOOKS_MOCK[0])
   }))
+
+  it('should show dialog after click on item', async() => {
+    // ARRANGE
+    const loader: HarnessLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+
+    // ACT
+    component.previewItem(BOOKS_MOCK[0]);
+    const dialog = await loader.getAllHarnesses(MatDialogHarness);
+    fixture.detectChanges();
+    console.log(await dialog[0].getText(), '123')
+    
+    // ASSERT
+    expect(dialog.length).toBe(1);
+  })
 
 
 

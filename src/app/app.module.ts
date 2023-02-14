@@ -10,6 +10,7 @@ import { ChangeColorDirective } from './change-color.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemPreviewComponent } from './item-preview/item-preview.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToggleComponent } from './toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { MatDialogModule } from '@angular/material/dialog';
     DiscountPipe,
     ChangeColorDirective,
     ItemPreviewComponent,
+    ToggleComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule],
+    MatDialogModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

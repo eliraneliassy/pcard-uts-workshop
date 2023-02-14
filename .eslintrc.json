@@ -23,7 +23,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "pcard-uts-workshop",
+            
             "style": "kebab-case"
           }
         ]
